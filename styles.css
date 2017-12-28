@@ -35,6 +35,10 @@ li {
 a, a:visited {
   color: cadetblue;
 }
+footer {
+  position: fixed;
+  bottom: 15px;
+}
 .remark-slide-container{
   background-color: #000000;
   color: #ffffff;
