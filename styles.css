@@ -1,0 +1,112 @@
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+body {
+  font-family: 'Droid Serif';
+}
+h1, h2, h3 {
+  font-family: 'Yanone Kaffeesatz';
+  font-weight: normal;
+  margin: .5em 0;
+}
+.remark-slide-content h3 {
+  font-size: 1.3em;
+}
+img {
+  height: 150px;
+  width: auto;
+}
+label, div.label {
+  display: inline-block;
+}
+p {
+  display: inline-block;
+  margin: 0;
+  width: 100%;
+}
+ul {
+  padding-left: 0;
+}
+li {
+  list-style: none;
+  margin-bottom: 1em;
+}
+a, a:visited {
+  color: cadetblue;
+}
+.remark-slide-container{
+  background-color: #000000;
+  color: #ffffff;
+}
+.remark-slide-content{
+  background-color: #000000;
+  color: #ffffff;
+}
+.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+.references, .reference-link{
+  font-size: 0.8rem;
+}
+
+.hater-info {
+  font-size: 0.6rem;
+}
+.only-sr{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  border:0;
+}
+.hidden {
+  display: none;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.errors {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.reverse {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.img-center {
+  text-align: center;
+}
+.img-center img {
+  height: 300px;
+}

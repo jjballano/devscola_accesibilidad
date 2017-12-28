@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Devscola acccessibility</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+<h1>Accesibilidad web</h1>
+<p>By jjballano</p>
+---
+<h2>¿Quién soy?</h2>
+--
+<ul>
+  <li>Desarrollador backend principalmente.</li>
+</ul>
+--
+<ul>
+  <li>Llevo haciendo software desde que el navegador de referencia era Internet Explorer 6.</li>
+</ul>
+--
+<ul>
+  <li>Tenía poca idea de accesibilidad hasta que he tenido que prepararme esta presentación.</li>
+</ul>
+--
+<ul>
+  <li>I can be wrong...</li>
+</ul>
+
+---
+<h2>¿Te has planteado alguna vez...</h2>
+--
+<ul>
+  <li>... hay 285 millones de personas en el mundo ciegas o con baja visión? <span class="reference-link">[1]</span></li>
+</ul>
+--
+<ul>
+  <li>... las personas ciegas o con visibilidad muy reducida no usan el ratón?</li>
+</ul>
+--
+<ul>
+  <li>... el 8% de los hombres y el 0,5% de las mujeres son personas daltónicas en España? <span class="reference-link">[2]</span></li>
+</ul>
+--
+<ul>
+  <li>... las personas que usan screen readers tienen que leerse tu página de inicio a fin si no les damos una buena estructura?</li>
+</ul>
+--
+<ul>
+  <li>... los screen readers leen el DOM de arriba a abajo y de izquierda a derecha en vez de como mostramos la pantalla visualmente?</li>
+</ul>
+--
+<ul class="references">
+  <li>[1] <a href="https://uvadoc.uva.es/bitstream/10324/14293/1/TFM-M259.pdf">https://uvadoc.uva.es/bitstream/10324/14293/1/TFM-M259.pdf</a></li>
+  <li>[2]<a href="https://es.wikipedia.org/wiki/Daltonismo#Herencia">https://es.wikipedia.org/wiki/Daltonismo#Herencia</a></li>
+</ul>
+
+---
+<h2>¿Por qué esta charla?</h2>
+Porque creo que como desarrolladores tenemos la responsabilidad de facilitar el acceso al software al máximo número de personas posible.
+
+<span class="hater-info">* salvo a los que usan Internet Explorer. Estos lo hacen así porque quieren y no debemos tener piedad</span>
+
+---
+
+<h1>Cosas a tener en cuenta para hacer una web accesible</h1>
+---
+<h2>Imágenes</h2>
+Añade siempre el atributo <code>alt</code> donde se explique lo que hay en la imagen.
+--
+
+```html
+<img src="https://goo.gl/vtP1Ft">
+```
+<img src="https://goo.gl/vtP1Ft" alt="Meme de gato enfadado diciendo no"/>
+--
+
+```html
+<img src="https://goo.gl/uJJsEY" alt="Meme de niño diciendo que lo he hecho bien">
+```
+<img src="https://goo.gl/uJJsEY" alt="Meme de niño diciendo que lo he hecho bien">
+
+---
+<h2>Imágenes</h2>
+<p>Si necesitas dar más detalles aún, puedes usar las etiquetas <code>figure</code> y <code>figcaption</code></p>
+
+```html
+<figure>
+  <img src="https://goo.gl/RX6Q5B" alt="gráfico de ventas desde 1928 hasta 2016">
+  <figcaption class='only-sr'>En el gráfico se ven las mayores ventas
+    a principios de los años 50 y las menores sobre el 2010.</figcaption>
+</figure>
+```
+<figure>
+  <img src="https://goo.gl/RX6Q5B" alt="gráfico de ventas desde 1928 hasta 2016">
+  <figcaption class='only-sr'>En el gráfico se ve como las mayores ventas se produjeron a principios de los años 50 y las más bajas sobre el 2010.</figcaption>
+</figure>
+
+<p>El atributo <code>longdesc</code> también podría usarse, pero no todos los screen reader lo leen.</p>
+
+---
+<h2>Imágenes</h2>
+--
+<h3>¿Todas las imágenes tienen que tener alt?</h3>
+--
+<p>Sí</p>
+--
+<h3>¿Todas las imágenes tienen que tener alt con texto?</h3>
+--
+<p>No</p>
+--
+<h3>¿Y cuáles no?</h3>
+--
+<p>Las que usamos para maquetación, imágenes que no aportan información ninguna, etc. Pondremos <code>alt=""</code></p>
+--
+<h3>¿Y cuáles son las imágenes en las que no debemos olvidar <b>nunca</b> poner el <code>alt</code>?</h3>
+--
+<p>Las que usamos como link, explicando bien qué es la imagen y a donde lleva. Por ejemplo: <code>alt="logo que redirige a la home de la web"</code></p>
+---
+<h2>Ocultar información visualmente</h2>
+--
+<ul>
+  <li>Muchas veces querremos ocultar información al usuario vidente, pero queremos darle información al invidente, como por ejemplo el <code>figcaption</code> anterior</li>
+</ul>
+--
+<ul>
+  <li>Si le ponemos <code>display: none</code> no será visible para nadie</li>
+</ul>
+--
+<ul>
+  <li>En lugar de eso, tenemos que hacerlo muy pequeño y sacarlo de la pantalla.</li>
+</ul>
+--
+<code>
+```css
+  .only-sr{
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    border:0;
+  }
+```
+</code>
+---
+<h2>Formularios</h2>
+<p>Una de las cosas que necesitamos que sean más accesibles son los formularios,
+  ya que de ello puede depender que, por ejemplo, un cliente pueda comprar en nuestra tienda online o no</p>
+---
+<h2>Formularios</h2>
+--
+<h3>Uso de <code>label</code></h3>
+<p>Siempre debemos etiquetar los campos del formulario con su correspondiente label</p>
+--
+
+```html
+<!-- No usar divs -->
+<div class="label">Nombre con div</div>
+<input type="text" id="name-div"></input>
+```
+<div class="label">Nombre con div</div>
+<input type="text" id="name-div"></input>
+
+--
+
+```html
+<!-- Usar label -->
+<label for="name-label">Nombre con label</label>
+<input type="text" id="name-label"></input>
+```
+<label for="name-label">Nombre con label</label>
+<input type="text" id="name-label"></input>
+
+???
+Mostrar como se escucha con el reader. Ctrl+alt+u y ver los inputs que hay.
+---
+<h2>Formularios</h2>
+<h3>Uso de <code>fieldset</code> (y <code>label</code>)</h3>
+
+--
+
+```html
+  <!-- Usar un fieldset para dar más información. -->
+  <fieldset>
+      <legend>Selecciona un color</legend>
+      <input type="radio" id="red" name="colors">
+      <label for="red">Rojo</label>
+      <input type="radio" id="green" name="colors">
+      <label for="green">Verde</label>
+      <input type="radio" id="blue" name="colors">
+      <label for="blue">Azul</label>
+  </fieldset>
+```
+<fieldset>
+    <legend>Selecciona un color</legend>
+    <input type="radio" id="red" name="colors">
+    <label for="red">Rojo</label>
+    <input type="radio" id="green" name="colors">
+    <label for="green">Verde</label>
+    <input type="radio" id="blue" name="colors">
+    <label for="blue">Azul</label>
+</fieldset>
+
+---
+
+<h2>Formularios</h2>
+<h3>Uso de <code>required</code></h3>
+<p>Es importante que pongamos la propiedad required en los campos obligatorios
+  para que el usuario sepa que tiene que añadir un valor</p>
+
+--
+
+```html
+<label for="name">Nombre</label>
+<input type="text" id="name" required></input>
+```
+<label for="name">Nombre</label>
+<input type="text" id="name" required></input>
+
+???
+Con el reader, si selecciono el campo me dice que es required e invalid data. Si le añado algo sólo me dice que required
+---
+<h2>Formularios</h2>
+<h3>Uso de <code>button</code></h3>
+<p>No se deben poner botones con <code>div</code>, sino que es mejor usar <code>button</code></p>
+--
+
+```html
+<div class='btn'>Botón con div</div>
+<button class='btn'>Botón con button</button>
+```
+<div class='btn'>Botón con div</div>
+<button class='btn'>Botón con button</button>
+
+???
+Mostrar con el reader que el del div no aparece
+---
+<h2>Formularios</h2>
+<h3>Atributo <code>tabindex</code></h3>
+<p>Con <code>tabindex</code> podemos definir como tiene que ser la navegabilidad por nuestro formulario mediante el tabulador</p>
+--
+<ul>
+  <li>Con <code>tabindex="-1"</code> el componente no será alcanzable por el tabulador.</li>
+  <li>Con <code>tabindex="0"</code> indica que el orden de secuencia será el del propio DOM.</li>
+  <li>Con <code>tabindex="X"</code> con x > 0, indica el orden de secuencia en el que irá el foco.</li>
+</ul>
+
+???
+Es importante cuando el orden en el que los tenemos en el DOM no es el que queremos que se rellenen.
+Por ejemplo, si ponemos los campos en columnas y queremos que se rellenen por filas
+---
+<h2>Formularios</h2>
+<h3>Atributo <code>tabindex</code></h3>
+```html
+<form>
+  <fieldset>
+    <label for="name">Nombre</label>
+    <input type="text" id="name" tabindex="0"></input>
+  </fieldset>
+  <fieldset>
+    <label for="lastname">Apellidos</label>
+    <input type="text" id="lastname" tabindex="0"></input>
+  </fieldset>
+  <fieldset>
+    <label for="age">Edad</label>
+    <input type="number" id="age" tabindex="0"></input>
+  </fieldset>
+</form>
+```
+<form>
+  <fieldset>
+    <label for="name">Nombre</label>
+    <input type="text" id="name" tabindex="0"></input>
+  </fieldset>
+  <fieldset>
+    <label for="lastname">Apellidos</label>
+    <input type="text" id="lastname" tabindex="0"></input>
+  </fieldset>
+  <fieldset>
+    <label for="age">Edad</label>
+    <input type="number" id="age" tabindex="0"></input>
+  </fieldset>
+</form>
+---
+<h2>Formularios</h2>
+<h3>Atributo <code>tabindex</code></h3>
+```html
+<form>
+  <fieldset>
+    <label for="name">Nombre</label>
+    <input type="text" id="name" tabindex="1"></input>
+  </fieldset>
+  <fieldset>
+    <label for="lastname">Apellidos</label>
+    <input type="text" id="lastname" tabindex="3"></input>
+  </fieldset>
+  <fieldset>
+    <label for="age">Edad</label>
+    <input type="number" id="age" tabindex="2"></input>
+  </fieldset>
+</form>
+```
+<form>
+  <fieldset>
+    <label for="name">Nombre</label>
+    <input type="text" id="name" tabindex="1"></input>
+  </fieldset>
+  <fieldset>
+    <label for="lastname">Apellidos</label>
+    <input type="text" id="lastname" tabindex="3"></input>
+  </fieldset>
+  <fieldset>
+    <label for="age">Edad</label>
+    <input type="number" id="age" tabindex="2"></input>
+  </fieldset>
+</form>
+---
+<h2>Formularios</h2>
+<h3>Atributo <code>tabindex</code></h3>
+```html
+<form>
+  <fieldset>
+    <label for="name">Nombre</label>
+    <input type="text" id="name" tabindex="1"></input>
+  </fieldset>
+  <fieldset>
+    <label for="lastname">Apellidos</label>
+    <input type="text" id="lastname" tabindex="-1"></input>
+  </fieldset>
+  <fieldset>
+    <label for="age">Edad</label>
+    <input type="number" id="age" tabindex="2"></input>
+  </fieldset>
+</form>
+```
+<form>
+  <fieldset>
+    <label for="name">Nombre</label>
+    <input type="text" id="name" tabindex="1"></input>
+  </fieldset>
+  <fieldset>
+    <label for="lastname">Apellidos</label>
+    <input type="text" id="lastname" tabindex="-1"></input>
+  </fieldset>
+  <fieldset>
+    <label for="age">Edad</label>
+    <input type="number" id="age" tabindex="2"></input>
+  </fieldset>
+</form>
+---
+<h2>Formularios</h2>
+<h3>Errores</h3>
+<p>Es habitual que cuando enviamos un formulario vía ajax, si hay errores los pongamos arriba del todo todos juntos</p>
+--
+
+```html
+<form id="form-with-errors-not-focus">
+  <ul class="hidden errors"></ul>
+  <fieldset>
+    <label for="name-form-without-focus">Nombre</label>
+    <input type="text" id="name-form-without-focus" tabindex="0"></input>
+  </fieldset>
+  <button onClick="checkErrors('form-with-errors-not-focus')" class="btn">Enviar</button>
+</form>
+```
+<form id="form-with-errors-not-focus">
+  <ul class="hidden errors"></ul>
+  <fieldset>
+    <label for="name-form-without-focus">Nombre</label>
+    <input type="text" id="name-form-without-focus" tabindex="0"></input>
+  </fieldset>
+  <button onClick="checkErrors('form-with-errors-not-focus')" class="btn">Enviar</button>
+</form>
+---
+<h2>Formularios</h2>
+<h3>Errores</h3>
+<p>Tenemos que avisar al usuario que hemos puesto unos errores arriba.</p>
+<p>Para ello, enviaremos el foco a los errores.</p>
+
+```html
+<form id="form-with-errors-focus">
+  <ul class="hidden errors"></ul>
+  <fieldset>
+    <label for="name-form-with-error">Nombre</label>
+    <input type="text" id="name-form-with-error" tabindex="0"></input>
+  </fieldset>
+  <button onClick="checkErrorsWithFocus('form-with-errors-not-focus')" class="btn">Enviar</button>
+</form>
+```
+<form id="form-with-errors-focus">
+  <ul class="hidden errors"></ul>
+  <fieldset>
+    <label for="name-form-with-error">Nombre</label>
+    <input type="text" id="name-form-with-error" tabindex="0"></input>
+  </fieldset>
+  <button onClick="checkErrorsWithFocus('form-with-errors-focus')" class="btn">Enviar</button>
+</form>
+
+---
+<h2>Cambios dinámicos con Javascript</h2>
+<p>Cuando cambiamos algo en la pantalla mediante Javascript y es importante que el usuario lo sepa,
+  debemos de llevar el foco a ese elemento, de esta manera sabrá que ha habido algún cambio</p>
+
+---
+<h2><code>ARIA (Accessible Rich Internet Applications)</code></h2>
+--
+<ul>
+  <li>Set de atributos usados para accesibilidad.</li>
+</ul>
+--
+<ul>
+  <li>La mejor manera de usar estos atributos es no tener que usarlos.</li>
+</ul>
+--
+<ul>
+  <li>Sólo habría que usarlo cuando no podamos hacerlo mejor con etiquetas html.</li>
+</ul>
+
+---
+<h2><code>ARIA (Accessible Rich Internet Applications)</code></h2>
+--
+
+```html
+<div aria-label="Este es el label">Contenido del campo</div>
+```
+
+<div aria-label="Este es el label">Contenido del campo</div>
+
+---
+<h2><code>Role</code></h2>
+<ul>
+  <li>Role es un atributo que usaremos para identificar qué tipo de objeto es</li>
+</ul>
+--
+<ul>
+  <li>Útil cuando no podemos poner la etiqueta HTML más semántica, por ejemplo, botones como div</li>
+</ul>
+
+--
+
+```html
+<div class='btn'>Div sin role</div>
+<div role="button" class='btn'>Div y role</div>
+```
+
+<div class='btn'>Div sin role</div>
+<div role="button" class='btn'>Div y role</div>
+
+---
+<h2><code>ARIA / role </code></h2>
+--
+<ul>
+  <li>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques">
+      Listado de atributos aria y valores de role
+    </a>
+  </li>
+</ul>
+
+--
+<ul>
+  <li>Pero recordad... ¡como última opción!</li>
+</ul>
+
+---
+<h2>Orden de elementos</h2>
+--
+<ul>
+  <li>Si cambiamos el orden de los elementos con css, el lector lo leerá como está en el DOM</li>
+</ul>
+--
+<ul>
+  <li><p class="reverse">?dadrev¿ ,neib yum edneitne es esarf atsE</p></li>
+</ul>
+--
+<ul>
+  <li>¿Y si le preguntamos al screen reader?</li>
+</ul>
+--
+
+```html
+<p class="reverse">?dadrev¿ ,neib yum edneitne es esarf atsE</p>
+.reverse {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+```
+
+---
+<h2>Idioma</h2>
+<ul>
+  <li>Debemos de indicar en qué idioma está la página mediante el atributo <code>lang</code></li>
+  <li>De esta manera el screen reader podrá ajustarse mejor</li>
+</ul>
+--
+
+```html
+<html lang="es-ES">
+....
+</html
+```
+
+---
+<h2>Nunca, nunca, nunca...</h2>
+--
+<ul>
+  <li>Autoplay de vídeos o música (o con botón de stop muy accesible)</li>
+</ul>
+--
+<ul>
+  <li>Cambiar la estructura de los elementos con css grid layout o similares cuando el orden importa</li>
+</ul>
+--
+<ul>
+  <li>Usar div para todo, cada cosa con su etiqueta semántica.</li>
+</ul>
+--
+<ul>
+  <li>No añadir alternativas a cosas como el drag & drop que sólo son usables con ratón</li>
+</ul>
+
+---
+<h2>¿Dudas? ¿Preguntas? ¿Comentarios?</h2>
+<div class="img-center">
+  <img alt="símbolo de pregunta" src="https://static.pexels.com/photos/356079/pexels-photo-356079.jpeg"></img>
+</div>
+    </textarea>
+    <script src="remark.min.js" charset="utf-8"></script>
+    <script>
+      var slideshow = remark.create();
+
+      var checkErrors = function(formId, focus){
+        focus = focus || false
+        var form = document.forms[formId];
+        var errors = "";
+        form.elements.forEach(function(field){
+          if (field.type === 'text' && !field.value){
+            //you can't focus a non input element without setting tabIndex
+            errors += "<li tabindex='-1'>Field "+field.id+" is required</li>"
+          }
+        });
+        if (errors){
+          var errorList = form.getElementsByClassName('errors')[0];
+          errorList.innerHTML = errors;
+          errorList.classList.remove('hidden');
+          if (focus){
+            errorList.children[0].focus();
+          }
+        }
+      }
+
+      var checkErrorsWithFocus = function(formId){
+        checkErrors(formId, true);
+      }
+    </script>
+  </body>
+</html>
