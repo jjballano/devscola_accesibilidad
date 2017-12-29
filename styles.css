@@ -114,3 +114,9 @@ footer {
 .img-center img {
   height: 300px;
 }
+
+.presentation-links{
+  position: absolute;
+  bottom: 40px;
+  text-align: left;
+}
