@@ -39,14 +39,6 @@ footer {
   position: fixed;
   bottom: 15px;
 }
-.remark-slide-container{
-  background-color: #000000;
-  color: #ffffff;
-}
-.remark-slide-content{
-  background-color: #000000;
-  color: #ffffff;
-}
 .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
 
 .references, .reference-link{

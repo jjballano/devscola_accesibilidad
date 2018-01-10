@@ -226,8 +226,9 @@ Mostrar como se escucha con el reader. Ctrl+alt+u y ver los inputs que hay.
 <label for="name">Nombre</label>
 <input type="text" id="name" required></input>
 ```
-<label for="name">Nombre</label>
-<input type="text" id="name" required></input>
+
+<label for="name_">Nombre</label>
+<input type="text" id="name_" required></input>
 
 ???
 Con el reader, si selecciono el campo me dice que es required e invalid data. Si le añado algo sólo me dice que required
@@ -281,16 +282,16 @@ Por ejemplo, si ponemos los campos en columnas y queremos que se rellenen por fi
 ```
 <form>
   <fieldset>
-    <label for="name">Nombre</label>
-    <input type="text" id="name" tabindex="0"></input>
+    <label for="thename_">Nombre</label>
+    <input type="text" id="thename_" tabindex="0"></input>
   </fieldset>
   <fieldset>
-    <label for="lastname">Apellidos</label>
-    <input type="text" id="lastname" tabindex="0"></input>
+    <label for="lastname_">Apellidos</label>
+    <input type="text" id="lastname_" tabindex="0"></input>
   </fieldset>
   <fieldset>
-    <label for="age">Edad</label>
-    <input type="number" id="age" tabindex="0"></input>
+    <label for="age_">Edad</label>
+    <input type="number" id="age_" tabindex="0"></input>
   </fieldset>
 </form>
 ---
@@ -314,16 +315,16 @@ Por ejemplo, si ponemos los campos en columnas y queremos que se rellenen por fi
 ```
 <form>
   <fieldset>
-    <label for="name">Nombre</label>
-    <input type="text" id="name" tabindex="1"></input>
+    <label for="thename1">Nombre</label>
+    <input type="text" id="thename1" tabindex="1"></input>
   </fieldset>
   <fieldset>
-    <label for="lastname">Apellidos</label>
-    <input type="text" id="lastname" tabindex="3"></input>
+    <label for="thelastname1">Apellidos</label>
+    <input type="text" id="thelastname1" tabindex="3"></input>
   </fieldset>
   <fieldset>
-    <label for="age">Edad</label>
-    <input type="number" id="age" tabindex="2"></input>
+    <label for="theage1">Edad</label>
+    <input type="number" id="theage1" tabindex="2"></input>
   </fieldset>
 </form>
 ---
@@ -347,16 +348,16 @@ Por ejemplo, si ponemos los campos en columnas y queremos que se rellenen por fi
 ```
 <form>
   <fieldset>
-    <label for="name">Nombre</label>
-    <input type="text" id="name" tabindex="1"></input>
+    <label for="thename2">Nombre</label>
+    <input type="text" id="thename2" tabindex="1"></input>
   </fieldset>
   <fieldset>
-    <label for="lastname">Apellidos</label>
-    <input type="text" id="lastname" tabindex="-1"></input>
+    <label for="thelastname2">Apellidos</label>
+    <input type="text" id="thelastname2" tabindex="-1"></input>
   </fieldset>
   <fieldset>
-    <label for="age">Edad</label>
-    <input type="number" id="age" tabindex="2"></input>
+    <label for="theage2">Edad</label>
+    <input type="number" id="theage2" tabindex="2"></input>
   </fieldset>
 </form>
 ---
